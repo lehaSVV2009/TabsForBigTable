@@ -1,0 +1,1595 @@
+<html>
+<head>
+
+<!--<base href="http://localhost:9080/Workplace/">-->
+<title>Свойства объекта</title>
+<script src="tabs.js"></script>
+
+<link rel="stylesheet" href="http://localhost:9080/Workplace/css/Wcm.css" type="text/css">
+<script>
+    var baseURL = "http://localhost:9080/Workplace";
+</script>
+<script src="http://localhost:9080/Workplace/js/Wcm.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="BuildName" content="per450.263">
+<meta name="BuildDate" content="09/12/2011">
+<meta name="Copyright" content="Электронный Архив. Версия 1.4.1">
+
+
+
+
+<style type="text/css">#lleo_dialog, #lleo_dialog * {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none 0 !important;
+    position: static !important;
+    vertical-align: baseline !important;
+    font: normal 13px Arial, Helvetica !important;
+    line-height: 15px !important;
+    color: #000 !important;
+    overflow: visible !important;
+    width: auto !important;
+    height: auto !important;
+    float: none !important;
+    visibility: visible !important;
+    text-align: left !important;
+    border-collapse: separate !important;
+    border-spacing: 2px !important;
+}
+
+#lleo_dialog iframe {
+    height: 0 !important;
+    width: 0 !important;
+}
+
+#lleo_dialog {
+    position: absolute !important;
+    background: #fff !important;
+    border: solid 1px #ccc !important;
+    padding: 7px 0 0 !important;
+    left: -999px;
+    top: -999px;
+    /*max-width: 450px !important;*/
+    width: 440px !important;
+    overflow: hidden;
+    display: block !important;
+    z-index: 999999999 !important;
+    opacity: 0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -moz-border-radius: 3px !important;
+    -webkit-border-radius: 3px !important;
+    border-radius: 3px !important;
+}
+
+#lleo_dialog.lleo_show {
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+}
+
+#lleo_dialog input::-webkit-input-placeholder {
+    color: #aaa !important;
+}
+
+#lleo_dialog .lleo_has_pic #lleo_word {
+    margin-right: 80px !important;
+}
+
+#lleo_dialog #lleo_translationsCopntainer1 {
+    position: relative !important;
+}
+
+#lleo_dialog #lleo_translationsCopntainer2 {
+    padding: 7px 0 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_word {
+    color: #000 !important;
+    margin: 0 5px 2px 0 !important;
+    /*float: left !important;*/
+}
+
+#lleo_dialog .lleo_has_sound #lleo_word {
+    margin-left: 17px !important;
+}
+
+#lleo_dialog #lleo_text {
+    font-weight: bold !important;
+    color: #d56e00 !important;
+    text-decoration: none !important;
+    cursor: default !important;
+}
+
+#lleo_dialog #lleo_text.lleo_known {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+
+#lleo_dialog #lleo_closeBtn {
+    position: absolute !important;
+    right: 6px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 0 !important;
+    color: #aaa !important;
+    display: block !important;
+    padding: 2px !important;
+    z-index: 9999999999 !important;
+    width: 7px !important;
+    height: 7px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#lleo_dialog #lleo_optionsBtn {
+    position: absolute !important;
+    right: 1px !important;
+    top: 12px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #aaa !important;
+    padding: 2px !important;
+    display: none;
+}
+
+#lleo_dialog #lleo_optionsBtn img {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+#lleo_dialog #lleo_sound {
+    float: left !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 12px !important;
+    background: 0 0 no-repeat !important;
+    cursor: pointer !important;
+    display: none !important;
+}
+
+#lleo_dialog .lleo_has_sound #lleo_sound {
+    display: block !important;
+}
+
+#lleo_dialog #lleo_picOuter {
+    position: absolute !important;
+    float: right !important;
+    right: 29px;
+    top: 0;
+    display: none !important;
+    z-index: 9 !important;
+}
+
+#lleo_dialog .lleo_has_pic #lleo_picOuter {
+    display: block !important;
+}
+
+#lleo_dialog #lleo_picOuter:hover {
+    z-index: 11 !important;
+}
+
+#lleo_dialog #lleo_pic,
+#lleo_dialog #lleo_picBig {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    border: solid 2px #fff !important;
+    -moz-border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    border-radius: 2px !important;
+    z-index: 1 !important;
+}
+
+#lleo_dialog #lleo_pic {
+    position: relative !important;
+    border: none !important;
+    width: 34px !important;
+}
+
+#lleo_dialog #lleo_picBig {
+    box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+#lleo_dialog #lleo_picOuter:hover #lleo_picBig {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+    -webkit-transition-delay: 0.3s !important;
+}
+
+#lleo_dialog #lleo_transcription {
+    color: #486D85 !important;
+    margin: 0 0 4px 29px !important;
+    color: #aaaaaa !important;
+}
+
+#lleo_dialog .lleo_no_trans {
+    color: #aaa !important;
+}
+
+#lleo_dialog .ll-translation-counter {
+    float: right !important;
+    font-size: 11px !important;
+    color: #aaa !important;
+    padding: 2px 2px 1px 10px !important;
+}
+
+#lleo_dialog .ll-translation-text {
+    float: left !important;
+    width: 80% !important;
+}
+
+#lleo_dialog #lleo_trans a {
+    color: #3F669F !important;
+    padding: 1px 4px !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .ll-translation-item {
+    width: 100% !important;
+    float: left !important;
+    padding: 1px 4px;
+    color: #3F669F !important;
+    padding: 3px !important;
+    border: solid 1px white !important;
+    -moz-border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    border-radius: 2px !important;
+}
+
+#lleo_dialog .ll-translation-item:hover {
+    border: solid 1px #9FC2C9 !important;
+    background: #EDF4F6 !important;
+    cursor: pointer !important;
+}
+
+#lleo_dialog .ll-translation-marker {
+    margin: 0px 5px 2px 2px !important;
+}
+
+#lleo_dialog #lleo_icons {
+    margin: 10px 0 7px !important;
+    color: #aaa !important;
+    line-height: 20px !important;
+    font-size: 11px !important;
+    clear: both !important;
+    padding-left: 16px !important;
+}
+
+#lleo_icons a {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 0 -2px 3px !important;
+    text-decoration: none !important;
+    background: 0 0 no-repeat !important;
+    opacity: 0.5 !important;
+}
+
+#lleo_icons a:hover {
+    opacity: 1 !important;
+}
+
+#lleo_icons a.lleo_google {
+    background-position: -34px 0 !important;
+}
+
+#lleo_icons a.lleo_multitran {
+    background-position: -64px 0 !important;
+}
+
+#lleo_icons a.lleo_lingvo {
+    background-position: -51px 0 !important;
+    width: 12px !important;
+}
+
+#lleo_icons a.lleo_dict {
+    background-position: -17px 0 !important;
+}
+
+#lleo_icons a.lleo_linguee {
+    background-position: -81px 0 !important;
+}
+
+#lleo_icons a.lleo_michaelis {
+    background-position: -98px 0 !important;
+}
+
+#lleo_dialog #lleo_contextContainer {
+    margin: 0 !important;
+    padding: 3px 15px 3px 10px !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)) !important;
+    border-bottom: solid 1px #ddd !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    display: none !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .lleo_has_context #lleo_contextContainer {
+    display: block !important;
+}
+
+#lleo_dialog #lleo_context {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    line-height: 12px !important;
+    font-size: 11px !important;
+    margin-left: 2px !important;
+}
+
+#lleo_dialog #lleo_context b {
+    line-height: 12px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+
+#lleo_dialog #lleo_gBrand {
+    color: #aaa !important;
+    font-size: 10px !important;
+    /*padding-right: 52px !important;*/
+    padding-bottom: 14px !important;
+    margin: -3px 4px 0 4px !important;
+    background: left bottom no-repeat !important;
+    display: inline-block !important;
+    float: right !important;
+}
+
+#lleo_dialog #lleo_gBrand.hidden {
+    display: none !important;
+}
+
+#lleo_dialog #lleo_translateContextLink {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#ddd)) !important;
+    border: solid 1px !important;
+    box-shadow: 1px 1px 0 #f6f6f6 !important;
+    border-color: #999 #aaa #aaa #999 !important;
+    -moz-border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    border-radius: 2px !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    margin: 1px 5px 0 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+}
+
+#lleo_dialog #lleo_translateContextLink:hover {
+    background: #f8f8f8 !important;
+}
+
+#lleo_dialog #lleo_setTransForm {
+    display: block !important;
+    margin-top: 3px !important;
+    padding-top: 5px !important;
+    /* Set position and background because the form might be overlapped by an image when no translations */
+    position: relative !important;
+    background: #fff !important;
+    z-index: 10 !important;
+    padding-bottom: 10px !important;
+    padding-left: 16px !important;
+}
+
+#lleo_dialog .lleo-custom-translation {
+    padding: 4px 5px !important;
+    border: solid 1px #ddd !important;
+    -moz-border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    border-radius: 2px !important;
+    width: 90% !important;
+    min-width: 270px !important;
+    background: -webkit-gradient(linear, 0 0, 0 20, from(#f1f1f1), to(#fff)) !important;
+    font: normal 13px Arial, Helvetica !important;
+    line-height: 15px !important;
+}
+
+#lleo_dialog .lleo-custom-translation:hover {
+    border: solid 1px #aaa !important;
+}
+
+#lleo_dialog .lleo-custom-translation:focus {
+    background: #FFFEC9 !important;
+}
+
+#lleo_dialog *.hidden {
+    display: none !important;
+}
+
+#lleo_dialog .infinitive {
+    color: #D56E00 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted #D56E00 !important;
+}
+
+#lleo_dialog .infinitive:hover {
+    border: none !important;
+}
+
+#lleo_dialog #lleo_trans {
+    zoom: 1;
+    border-top: 1px solid #eeeeee !important;
+    margin: 10px 0 0 !important;
+    padding: 5px 30px 0 14px !important;
+}
+
+#lleo_dialog .lleo_clearfix {
+    display: block !important;
+    clear: both !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    font-size: 0 !important;
+}
+
+#lleo_dialog #lleo_markBlock {
+    background: #eeeeee !important;
+    cursor: pointer !important;
+    border-bottom-left-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+    border-collapse: separate !important;
+    border-spacing: 2px !important;
+}
+
+#lleo_dialog #lleo_markBlock img {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+#lleo_dialog #lleo_markBlock .icon-cell {
+    padding: 5px 2px 5px 16px !important;
+    height: 17px !important;
+}
+
+#lleo_dialog #lleo_markBlock .wide-cell {
+    width: 100% !important;
+}
+
+#lleo_dialog #lleo_markBlock .text-cell {
+    color: #999999 !important;
+    font: normal 13px Arial, Helvetica !important;
+    text-shadow: 0 1px #fff !important;
+}
+
+#lleo_dialog #lleo_markBlock td {
+    vertical-align: middle !important;
+    border-collapse: separate !important;
+    border-spacing: 2px !important;
+}
+
+#lleo_dialog #lleo_picOuter table {
+    width: 44px !important;
+    position: absolute !important;
+    right: 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_picOuter td {
+    width: 38px !important;
+    height: 38px !important;
+    border: 1px solid #eeeeee !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+#lleo_dialog #lleo_picOuter td div {
+    height: 38px !important;
+    overflow: hidden !important;
+}</style>
+<style type="text/css">
+    .ll-content-notification * {
+        letter-spacing: normal !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: none !important;
+        border: 0 !important;
+        float: none !important;
+        text-align: left !important;
+        text-decoration: none !important;
+        font: normal 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    }
+
+    .ll-content-notification {
+        vertical-align: baseline !important;
+        color: #000 !important;
+        overflow: visible !important;
+        visibility: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: fixed !important;
+        background: #fff !important;
+        border: solid 1px #AAA !important;
+        /*
+        left: -999px;
+        top: -999px;
+        */
+        width: auto;
+        /* width: 300px !important; */
+        display: block;
+        z-index: 999999999 !important;
+        -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+        -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+        -webkit-border-radius: 3px !important;
+        -moz-border-radius: 3px !important;
+        border-radius: 3px !important;
+        overflow: hidden !important;
+        /* opacity: 0 !important; */
+        transition: opacity 0.8s !important;
+        -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+        -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+        -o-transition: opacity 0.8s !important; /* Opera */
+        cursor: default !important;
+    }
+
+    .ll-content-notification-shown {
+        opacity: 1 !important;
+        transition: opacity 0.8s !important;
+        -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+        -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+        -o-transition: opacity 0.8s !important; /* Opera */
+    }
+
+    .ll-content-notification-header {
+        border: 0 !important;
+        margin: 0 !important;
+        background: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAABJJREFUGFdjePHmCxw9e/UZjgAVYhYtk8xZqAAAAABJRU5ErkJggg==) !important;
+        border-bottom: solid 1px #CCC !important;
+        padding: 1px 4px !important;
+        min-height: 18px !important;
+        width: 100% !important;
+        -webkit-border-top-left-radius: 3px !important;
+        -webkit-border-top-right-radius: 3px !important;
+        -moz-border-radius-topleft: 3px !important;
+        -moz-border-radius-topright: 3px !important;
+        border-top-left-radius: 3px !important;
+        border-top-right-radius: 3px !important;
+        border-collapse: collapse !important;
+        border-spacing: 0 !important;
+    }
+
+    .ll-content-notification-header-pic {
+        border: 0 !important;
+        margin: 0 !important;
+        padding: 3px 0 0 3px !important;
+        width: 20px !important;
+        vertical-align: top !important;
+        line-height: 1px !important;
+    }
+
+    .ll-content-notification-header-pic img {
+        border: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        line-height: 1px !important;
+    }
+
+    .ll-content-notification-header-caption {
+        font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+        font-weight: bold !important;
+        line-height: 15px !important;
+        color: #555 !important;
+        float: left !important;
+        text-shadow: none !important;
+        letter-spacing: normal !important;
+        white-space: normal !important;
+        padding: 3px !important;
+        margin: 0 !important;
+    }
+
+    .ll-content-notification-header-close {
+        width: 15px !important;
+        vertical-align: top !important;
+        text-align: right !important;
+        padding: 6px 5px 0 0 !important;
+        margin: 0 !important;
+        line-height: 1px !important;
+    }
+
+    .ll-content-notification-header-close img {
+        border: 0 !important;
+        width: 7px !important;
+        height: 7px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .ll-content-notification-content {
+        margin: 0 !important;
+        padding: 8px !important;
+        float: left !important;
+        overflow: hidden !important;
+        width: auto !important;
+    }
+
+    .ll-content-notification-content-logo {
+        float: left !important;
+        height: 48px !important;
+        width: 48px !important;
+    }
+
+    .ll-content-notification-content-main {
+        margin-left: 60px !important;
+        overflow: hidden !important;
+        padding: 0 0 2px 0 !important;
+        color: #333 !important;
+        text-align: left !important;
+        text-shadow: none !important;
+        letter-spacing: normal !important;
+        font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+        line-height: 15px !important;
+        width: auto !important;
+    }
+
+    .ll-content-notification-content-header {
+        text-align: left !important;
+        text-decoration: none !important;
+        font: bold 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+        line-height: 19px !important;
+        margin: 0 0 4px 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        color: #333 !important;
+        text-shadow: none !important;
+        letter-spacing: normal !important;
+        display: block !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+
+    .ll-content-notification-word {
+        color: #d56e00 !important;
+        font-weight: bold !important;
+        font-size: 14px !important;
+    }
+</style>
+
+
+</head>
+<body class="wcmBody">
+<a href="properties/ObjectInfo.jsp?windowId=_0.S0#center"><img src="images/web/common/Spacer.gif" width="0" height="0"
+                                                               border="0" alt="Перейти к контенту"></a>
+<table class="bannerTable" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td width="99%" rowspan="2" valign="bottom">
+            <a href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=WcmController&amp;eventName=Home"><img
+                    class="bannerImage" src="images/web/common/Banner.gif" border="0" alt="Домой" title="Домой"
+                    width="420" height="66"></a><br>
+            Adm1 | 21 Январь 2014 г.
+        </td>
+        <td nowrap="" align="right" valign="top">
+        </td>
+    </tr>
+    <tr>
+        <td nowrap="" align="right" valign="bottom">
+            <a title="Справка"
+               href="javascript:openHelpWindow('http://localhost:9080/Workplace/custom/Help.html?returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2Fproperties%2FObjectInfo.jsp')">Справка</a>
+            | <a title="Домой"
+                 href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=WcmController&amp;eventName=Home">Домой</a>
+            | <a title="Правка пользовательских предпочтений"
+                 href="http://localhost:9080/Workplace/WcmUserPreferences.jsp?returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2Fproperties%2FObjectInfo.jsp">Предпочтения</a>
+            | <a title="Выход из системы"
+                 href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=WcmController&amp;eventName=SignOut">Выход
+            из системы</a></td>
+    </tr>
+    </tbody>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+    <td colspan="2" class="treeView"></td>
+    <td class="tabBar">
+        <table class="tabBarTable" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+            <tr>
+                <td><img src="images/web/common/WhitePixel.gif" alt="" width="1" height="11"></td>
+                <td nowrap="" class="tabBar"><a class="tabBarLink" id="favorites" href="Favorites.jsp"><img
+                        src="images/web/common/Spacer.gif" width="0" height="0" border="0" alt="">Ярлыки</a></td>
+                <td><img src="images/web/common/WhitePixel.gif" alt="" width="1" height="11"></td>
+                <td nowrap="" class="tabBar"><a class="tabBarLink" id="browse" href="Browse.jsp"><img
+                        src="images/web/common/Spacer.gif" width="0" height="0" border="0" alt="">Обзор</a></td>
+                <td><img src="images/web/common/WhitePixel.gif" alt="" width="1" height="11"></td>
+                <td nowrap="" class="tabBar"><a class="tabBarLink" id="search"
+                                                href="Search.jsp?eventTarget=layout!searchModule!searchForm&amp;eventName=Select&amp;id={F137EA28-735B-4AB7-B37E-02A8BF91B9A5}&amp;objectType=document&amp;objectStoreName=GPN_FN_Store01&amp;label=._PQ._Pu._P1._P8._Pw._QK._P3.__.._P9._P8._P2._QA._P4&amp;vsId={AC924CDC-22BA-4B77-9E12-5FD9A28FCFF4}&amp;versionStatus=1&amp;mimeType=application/x-filenet-searchtemplate"><img
+                        src="images/web/common/Spacer.gif" width="0" height="0" border="0" alt="">Поиск</a></td>
+                <td><img src="images/web/common/WhitePixel.gif" alt="" width="1" height="11"></td>
+                <td nowrap="" class="tabBar"><a class="tabBarLink" id="author" href="WcmAuthor.jsp"><img
+                        src="images/web/common/Spacer.gif" width="0" height="0" border="0" alt="">Автор</a></td>
+                <td><img src="images/web/common/WhitePixel.gif" alt="" width="1" height="11"></td>
+                <td nowrap="" class="tabBar"><a class="tabBarLink" id="admin" href="WcmAdmin.jsp"><img
+                        src="images/web/common/Spacer.gif" width="0" height="0" border="0" alt="">Администратор</a></td>
+                <td><img src="images/web/common/WhitePixel.gif" alt="" width="1" height="11"></td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+<td height="100%" class="treeViewInfo" colspan="2" valign="top" width="0%">
+<table height="100%" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td height="100%" class="treeView">
+    <img alt="" src="images/web/common/Spacer.gif" width="15">
+</td>
+<td valign="top">
+<table width="145" cellpadding="1" cellspacing="0" border="0">
+<tbody>
+<tr>
+    <td colspan="3" height="5" width="100%" class="treeViewInfo"><img
+            src="images/web/common/Spacer.gif" width="1" height="1"></td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 8px;" nowrap="" class="treeViewInfo"><span
+            class="treeViewLinkRootInfo"><img class="treeViewIcon" height="1" width="1" border="0"
+                                              src="images/web/common/Spacer.gif" align="absmiddle"
+                                              alt="" title="Информационное">Информационное</span>
+    </td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewSelectedInfo"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=SelectPanel&amp;page=0"
+            class="treeViewLinkInfo"><img class="treeViewIcon" height="16" width="16" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt="Selected  Просмотр" title="Атрибуты">Атрибуты</a>
+    </td>
+    <td class="treeViewSelectedInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewInfo"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=SelectPanel&amp;page=1"
+            class="treeViewLinkInfo"><img class="treeViewIcon" height="16" width="16" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt=" Просмотр" title="Настройка прав доступа">Настройка
+        прав доступа</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewInfo"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=SelectPanel&amp;page=2"
+            class="treeViewLinkInfo"><img class="treeViewIcon" height="16" width="16" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt=" Просмотр" title="Родительские документы">Родительские
+        документы</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewInfo"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=SelectPanel&amp;page=3"
+            class="treeViewLinkInfo"><img class="treeViewIcon" height="16" width="16" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt=" Просмотр" title="Версии">Версии</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewInfo"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=SelectPanel&amp;page=4"
+            class="treeViewLinkInfo"><img class="treeViewIcon" height="16" width="16" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt=" Просмотр" title="Каталоги">Каталоги</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewInfo"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=SelectPanel&amp;page=5"
+            class="treeViewLinkInfo"><img class="treeViewIcon" height="16" width="16" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt=" Просмотр" title="Хронология">Хронология</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 8px;" nowrap="" class="treeViewInfo"><span
+            class="treeViewLinkRootInfo"><img class="treeViewIcon" height="1" width="1" border="0"
+                                              src="images/web/common/Spacer.gif" align="absmiddle"
+                                              alt="" title="&amp;nbsp;">&nbsp;</span></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 8px;" nowrap="" class="treeViewAction"><span
+            class="treeViewLinkRoot"><img class="treeViewIcon" height="1" width="1" border="0"
+                                          src="images/web/common/Spacer.gif" align="absmiddle"
+                                          alt="Действие" title="">Действия</span></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a
+            href="http://localhost:9080/Workplace/getContent?mode=download&amp;objectType=document&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;objectStoreName=GPN_FN_Store01&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FBrowse.jsp"
+            class="treeViewLink"><img class="treeViewIcon" height="16" width="16" border="0"
+                                      src="images/action/Download16.gif" align="absmiddle"
+                                      alt="Действие" title="">Загрузить</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/operations/WcmCheckoutObject.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;mimeType=image/png&amp;selectEventName=StateChanged&amp;selectEventCommand=checkout&amp;&amp;windowIdMode=CREATE_POPUP', 'window_checkout', 'no', 'no', 'yes', 'yes', 625, 350, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0"
+            src="images/action/Checkout16.gif" align="absmiddle" alt="Действие" title="">Зарезервировать</a>
+    </td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/operations/WcmCancelCheckout.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;mimeType=image/png&amp;selectEventName=StateChanged&amp;selectEventCommand=cancelcheckedout&amp;&amp;windowIdMode=CREATE_POPUP', 'window_cancelCheckout', 'no', 'no', 'yes', 'yes', 650, 375, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0"
+            src="images/action/CancelCheckout16.gif" align="absmiddle" alt="Действие" title="">Отменить
+        резервирование</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/integrationWebBasedCommand?_commandId=1030&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectStoreName=GPN_FN_Store01&amp;objectType=document&amp;_responseURL=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253Fop%253Dcheckin%2526eventName%253DStateChanged%2526windowId%253D_0.S0&amp;_autoConfirm=true&amp;quickCheckin=true&amp;windowIdMode=CREATE_POPUP', 'window_quickCheckin', 'no', 'no', 'yes', 'yes', 800, 600, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0"
+            src="images/action/QCheckin16.gif" align="absmiddle" alt="Действие" title="">Создать
+        новую версию</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/operations/WcmFileObject.jsp?id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectStoreName=GPN_FN_Store01&amp;objectType=document&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;windowIdMode=CREATE_POPUP', 'window_file', 'no', 'no', 'yes', 'yes', 800, 600, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0" src="images/action/File16.gif"
+            align="absmiddle" alt="Действие" title="">Создать ссылку</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/operations/WcmUnfileObject.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;windowIdMode=CREATE_POPUP', 'window_unfile', 'no', 'no', 'yes', 'yes', 800, 600, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0" src="images/action/Unfile16.gif"
+            align="absmiddle" alt="Действие" title="">Удалить ссылку</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/operations/WcmDeleteObject.jsp?id={106B87B2-A860-44F9-A4E2-528719045757}&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;mimeType=image/png&amp;objectStoreName=GPN_FN_Store01&amp;objectType=document&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;selectEventName=StateChanged&amp;selectEventCommand=delete&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;targetUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252FBrowse.jsp&amp;windowIdMode=CREATE_POPUP', 'window_delete', 'no', 'no', 'yes', 'yes', 600, 250, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0" src="images/action/Delete16.gif"
+            align="absmiddle" alt="Действие" title="">Удаление</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/wizards/WcmMoveDocument.jsp?id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectStoreName=GPN_FN_Store01&amp;objectType=document&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;windowIdMode=CREATE_POPUP', 'window_move', 'no', 'no', 'yes', 'yes', 800, 600, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0" src="images/action/Move16.gif"
+            align="absmiddle" alt="Действие" title="">Переместить</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/operations/ChangeCompoundDocument.jsp?selectEventName=StateChanged&amp;selectEventCommand=changeToCompound&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;objectStoreName=GPN_FN_Store01&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;objectType=document&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;mimeType=image/png&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2FWcmCloseWindow.jsp%3FrefreshUrl%3Dhttp%253A%252F%252Flocalhost%253A9080%252FWorkplace%252Fproperties%252FObjectInfo.jsp%253FwindowId%253D_0.S0&amp;windowIdMode=CREATE_POPUP', 'window_changeCompound', 'no', 'no', 'yes', 'yes', 650, 300, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0"
+            src="images/action/ChangeCompound16.gif" align="absmiddle" alt="Действие" title="">Изменить
+        составной документ</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/custom/CreateUserRequest.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;classId={773B62FF-E699-4001-896C-CC66A9575CE6}&amp;requestType=1&amp;windowIdMode=CREATE_POPUP', 'window_permissionRequest', 'no', 'no', 'yes', 'yes', 625, 350, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0"
+            src="images/action/Checkout16.gif" align="absmiddle" alt="Действие" title="">Запрос на
+        предоставление доступа к документу</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+<tr>
+    <td height="18">
+    </td>
+    <td style="padding-left: 13px;" nowrap="" class="treeViewAction"><a href="" target="_blank"
+                                                                        onclick="createNewWindow('http://localhost:9080/Workplace/custom/CreateUserRequest.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;classId={773B62FF-E699-4001-896C-CC66A9575CE6}&amp;requestType=2&amp;windowIdMode=CREATE_POPUP', 'window_issueRequest', 'no', 'no', 'yes', 'yes', 625, 350, 'center', 'middle', 'yes'); return false;"
+                                                                        class="treeViewLink"><img
+            class="treeViewIcon" height="16" width="16" border="0"
+            src="images/action/Checkout16.gif" align="absmiddle" alt="Действие" title="">Запрос на
+        выдачу оригинала документа</a></td>
+    <td class="treeViewInfo">
+        <img alt="" src="images/web/common/Spacer.gif" width="0">
+    </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="100%" valign="top">
+<div class="tabBarSelected"><img alt="" src="images/web/common/Spacer.gif" height="5" width="1"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="10">
+<tbody>
+<tr>
+<td>
+<a name="center"></a>
+<table width="100%" cellspacing="0" border="0" cellpadding="2">
+    <tbody>
+    <tr class="wcmPathText">
+        <td class="wcmPathText"><span class="wcmPathLabel">Документ:&nbsp;
+                </span><span class="wcmPathLinkEnd"><img height="16" align="texttop" title=""
+                                                         src="images/state/None16.gif" width="0"></span><img
+                src="images/state/None16.gif" title="" width="6" height="16"><a
+                href="http://localhost:9080/Workplace/getContent?objectStoreName=GPN_FN_Store01&amp;vsId=%7BD3A10285-09FD-4203-B4D8-F90481942FBA%7D&amp;id=%7B106B87B2-A860-44F9-A4E2-528719045757%7D&amp;objectType=document"
+                target="_blank"><img title="image/png" src="images/type/GenericDocument16.gif" border="0" height="16"
+                                     width="16" align="texttop"></a><img src="images/state/None16.gif" title=""
+                                                                         width="6" height="16"><a
+                href="http://localhost:9080/Workplace/getContent?objectStoreName=GPN_FN_Store01&amp;vsId=%7BD3A10285-09FD-4203-B4D8-F90481942FBA%7D&amp;id=%7B106B87B2-A860-44F9-A4E2-528719045757%7D&amp;objectType=document"
+                target="_blank" class="wcmPathLinkEnd">warrant test 3 - take out text</a>
+            &nbsp;
+            <span class="wcmPathLabelEnd">(Версия 1.0, Released)</span></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<table cellspacing="1" cellpadding="3" width="100%" border="0">
+<tbody>
+<tr>
+    <td colspan="3">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody>
+            <tr>
+                <td class="wcmFormText"><span class="wcmPathLabel">Класс:
+                                                &nbsp;
+                                            </span><span class="wcmPathLabelEnd"><i>Правовой документ</i>
+                                            &nbsp;
+                                            <i>(только для чтения)</i>
+                                        &nbsp;
+                                    </span></td>
+                <td nowrap="true" width="1%" align="right"><a
+                        href="operations/PropertyPrintView.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;expandSystemProps=true"
+                        target="_blank"><img title="Представление для печати" src="images/action/PrintView16.gif"
+                                             border="0" height="16" width="16"></a><img src="images/state/None16.gif"
+                                                                                        title="" width="6"
+                                                                                        height="16"><a
+                        href="operations/PropertyPrintView.jsp?objectStoreName=GPN_FN_Store01&amp;label=warrant.__.test.__.3.__.-.__.take.__.out.__.text&amp;id={106B87B2-A860-44F9-A4E2-528719045757}&amp;objectType=document&amp;vsId={D3A10285-09FD-4203-B4D8-F90481942FBA}&amp;majorVersion=1&amp;minorVersion=0&amp;versionStatus=1&amp;expandSystemProps=true"
+                        target="_blank" class="wcmListViewLink">Представление для печати
+                    &nbsp;
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+<td id="propertiesArea">
+<ul id="tabs"></ul>
+<div id="tablesArea"></div>
+<table id="propertiesTable">
+<tbody>
+<tr>
+    <th width="1%" class="wcmFormMainHeader"><img height="16" width="16" src="images/web/common/Spacer.gif" alt=""></th>
+    <th class="wcmFormMainHeader" align="left">Атрибут</th>
+    <th class="wcmFormMainHeader" align="left">Значение</th>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="DocumentTitle">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Заголовок документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">warrant test 3 - take out text</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnOrganization">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Наименование организации - автор документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">ОАО "Газпром нефть"</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnClassifierObjectRef">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven"><a title="Развернуть свойства объекта"
+                                                                        href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo!WcmPropertiesInfoPage&amp;eventName=Expand&amp;objectStoreName=GPN_FN_Store01&amp;propertySymname=GpnClassifierObjectRef&amp;id={2FFA8692-960E-48CF-A118-DAB3E398AC4D}&amp;objectType=folder&amp;mimeType="><img
+            height="16" width="16" title="Развернуть свойства объекта" src="images/action/ShowContents16.gif"
+            border="0"></a>&nbsp;Вид документа по классификатору
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">1040102. Доверенность&nbsp;<a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo!WcmPropertiesInfoPage&amp;eventName=GetInfo&amp;objectStoreName=GPN_FN_Store01&amp;id={2FFA8692-960E-48CF-A118-DAB3E398AC4D}&amp;objectType=folder&amp;class=GpnClassifierFolderLevel3&amp;mimeType=&amp;returnUrl=http%3A%2F%2Flocalhost%3A9080%2FWorkplace%2Fproperties%2FObjectInfo.jsp%3FwindowId%3D_0.S0&amp;label=1040102.__s.__.._PT._P8._Pw._Pz._Q_._Pz._P7._P7._P8._QA._QB._QL"><img
+            height="16" width="16" src="images/action/GetInfo16.gif" border="0"
+            title="Получить информацию для 1040102. Доверенность"></a></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnSignerName">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Подписант (Фамилия И.О.)
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">подписал сидоров</td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentDate">
+    <td width="16" class="wcmFormRowEven"><img height="16" width="16" alt="Требуется" src="images/state/Required16.gif"
+                                               border="0" title="Требуется"></td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Дата документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">12.11.13 0:00</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnRegistryNumber">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Регистрационный номер документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentTitle">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Краткий заголовок
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentCase">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd"><a title="Развернуть свойства объекта"
+                                                                       href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo!WcmPropertiesInfoPage&amp;eventName=Expand&amp;objectStoreName=GPN_FN_Store01&amp;propertySymname=GpnDocumentCase&amp;id=&amp;objectType=&amp;mimeType="><img
+            height="16" width="16" title="Развернуть свойства объекта" src="images/action/ShowContents16.gif"
+            border="0"></a>&nbsp;Связь с номенклатурой
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">&nbsp;</td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentAddresser">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Адресант (автор, корреспондент)
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnOfficeWorkIndex">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Делопроизводственный индекс (владелец документа,
+        справочник КТ-16)
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">УАПБ (НК-24)</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnIndexOfDocumentInCase">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Номер документа в деле
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnMainDocumentSheetNumber">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Количество листов основного документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnApplicationNumber">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Количество приложений
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnCommonApplicationSheetNumber">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Общее количество листов приложений
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnExecutivePosition">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Должность исполнителя
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnValidTo">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Срок действия
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">10.11.13 0:00</td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentDeveloper">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Разработчик (подразделение)
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnUIDInExternalSystem">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Уникальный номер во внешней системе
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentLanguage">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Язык документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">Русский</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnStorageBank">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Фонд
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">ГПН</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnTermlessStorageAttr">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">На бессрочном хранении
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnFIOTermlessStorage">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">ФИО отвественного за бессрочное хранение
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnStorageIndex">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Топографический индекс
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentStorageKind">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Вид хранения
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnOutOfficeStorage">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Внеархивное хранение
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentQuality">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Состояние бумажного оригинала
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">хорошее</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnDamageType">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Характер повреждений
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentArchiveCode">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Архивный код документа
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnInventoryNumber">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Номер описи
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnInventoryCode">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Код описи
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnStorageStatus">
+    <td width="16" class="wcmFormRowEven"><img height="10" width="8" src="images/state/Marking16.gif" border="0"
+                                               title="Маркировка"></td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Статус хранения
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="2" symname="GpnDocumentAvailability">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Наличие бумажного оригинала
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">изъят</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnTakeOutPersonName">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Кому выдан
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">петрову</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnGivenOutReason">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Выдан на основании
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">просто так</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnReturnDate">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Дата возврата в Архив
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">22.11.13 0:00</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnUsageKind">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Характер использования
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd">для использования за пределами архивохранилища</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnLossReasonComments">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Комментарии о причине утраты
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnRemovalActNumber">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Акт о выделении к уничтожению
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnStorageKindAttr">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Тип хранения
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnImplementatorName">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Должность, фамилия и инициалы исполнителя
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnDeliveryDate">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Дата выдачи
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">04.11.13 0:00</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnStatus">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Статус доверенности
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnTermlessDepartmentName">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven"><a title="Развернуть свойства объекта"
+                                                                        href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo!WcmPropertiesInfoPage&amp;eventName=Expand&amp;objectStoreName=GPN_FN_Store01&amp;propertySymname=GpnTermlessDepartmentName&amp;id=&amp;objectType=&amp;mimeType="><img
+            height="16" width="16" title="Развернуть свойства объекта" src="images/action/ShowContents16.gif"
+            border="0"></a>&nbsp;Подразделение бессрочного хранения
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven">&nbsp;</td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnConfidental">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Гриф конфиденциальности
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnFinalDate">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Дата окончания делопроизводства
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnInventoryOrderNumber">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Порядковый номер единицы хранения в описи
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnCommentAttr">
+    <td width="16" class="wcmFormRowEven">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowEven">Примечание
+        :
+    </td>
+    <td width="100%" class="wcmFormRowEven"></td>
+</tr>
+<tr class="WcmPropertyRow" tab="1" symname="GpnAdditionalParam">
+    <td width="16" class="wcmFormRowOdd">
+        &nbsp;
+    </td>
+    <td nowrap="true" width="170" scope="row" class="wcmFormRowOdd">Коллегиальный орган
+        :
+    </td>
+    <td width="100%" class="wcmFormRowOdd"></td>
+</tr>
+<tr>
+    <th colspan="3" width="1%" class="wcmFormMainHeader" align="left"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo!WcmPropertiesInfoPage&amp;eventName=SystemProperties&amp;showSystemProperties=1"><img
+            title="Показать свойства системы" src="images/action/ShowContents16.gif" border="0" height="16" width="16"></a><img
+            src="images/state/None16.gif" title="" width="6" height="16"><a
+            href="http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo!WcmPropertiesInfoPage&amp;eventName=SystemProperties&amp;showSystemProperties=1"
+            class="wcmListViewActionLink">Показать свойства системы</a></th>
+</tr>
+<tr>
+    <td style="padding: 0px" class="wcmFormMainHeader" colspan="3"><img height="3" width="1"
+                                                                        src="images/web/common/Spacer.gif" alt=""></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td width="80%" align="right"><img alt="" src="images/web/common/Leftfade.gif" height="1"></td>
+        <td width="20%" class="wcmSeparator"><img alt="" src="images/web/common/Spacer.gif" height="1"></td>
+    </tr>
+    </tbody>
+</table>
+<table width="100%" cellspacing="2" cellpadding="0" border="0">
+    <tbody>
+    <tr style="white-space: nowrap">
+    </tr>
+    </tbody>
+</table>
+<table width="100%" cellspacing="2" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td align="right" width="100%">
+            <button name="Закрыть" title="Чтобы закрыть Информацию, нажмите кнопку Закрыть"
+                    onclick="window.location='http://localhost:9080/Workplace/properties/ObjectInfo.jsp?windowId=_0.S0&amp;eventTarget=objectInfo&amp;eventName=Exit';return false;">
+                Закрыть
+            </button>
+        </td>
+        <td><img alt="" src="images/web/common/Spacer.gif" width="2"></td>
+    </tr>
+    </tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+    <td class="treeView">&nbsp;</td>
+    <td class="treeView"><img alt="" src="images/web/common/Spacer.gif" width="1"></td>
+    <td class="footerLinksBar">
+        <!-- FooterLinksBar -->
+        <table class="footerLinksBar" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+            <tr>
+                <td align="left">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                        <tr>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td align="right">
+                    <table cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                        <tr>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+</tbody>
+</table>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tbody>
+    <tr>
+        <td nowrap="" align="left" valign="middle" class="wcmFooter">&nbsp;Электронный Архив. Версия 1.4.1</td>
+    </tr>
+    </tbody>
+</table>
+
+
+GpnWorkplace/src/main/webapp/properties - begin
+
+
+GpnWorkplace/src/main/webapp/properties - end
+</body>
+</html>
