@@ -66,13 +66,13 @@ var SPAN_TAG = 'span';
  *  CLASSES FOR TABS
  *
  */
-var TAB_CLASS_NAME = 'tab';
+var TAB_CLASS = 'tab';
 
-var TAB_AREA_CLASS_NAME = 'tabs';
+var TAB_AREA_CLASS = 'tabs';
 
-var SELECTED_TAB_CLASS_NAME = 'tabSelected';
+var SELECTED_TAB_CLASS = 'tabSelected';
 
-var TAB_TEXT_CLASS_NAME = 'tabText';
+var TAB_TEXT_CLASS = 'tabText';
 
 /**
  *
@@ -118,7 +118,6 @@ var MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING = 2;
  */
 
 
-
 /**
  *  Get all <tr> elements from table
  *
@@ -138,13 +137,11 @@ function getAllTrsFromTable(table) {
 }
 
 
-
 /**
  *
  *  ATTRIBUTE FUNCTIONS
  *
  */
-
 
 
 /**
@@ -161,7 +158,6 @@ Array.prototype.contains = function (checkedElement) {
     }
     return false;
 }
-
 
 
 /**
@@ -190,13 +186,11 @@ function findAttributeValues(properties, attributeName) {
 }
 
 
-
 /**
  *
  *  TABS
  *
  */
-
 
 
 /**
@@ -214,7 +208,6 @@ function initTabs(tabNames) {
     appendElements(tabs, tabsArea);
 
 }
-
 
 
 /**
@@ -246,7 +239,6 @@ function createTabs(tabNames) {
 }
 
 
-
 /**
  *  Create simple tag that will be used as tab (reference to defined table)
  *
@@ -261,9 +253,11 @@ function createTab(tabName, tabValue, onClickFunction, mouseOverFunction, mouseO
     var tab = document.createElement(DIV_TAG);
 
     tab.name = tabName;
-    tab.appendChild(
-        createSpan(tabValue, TAB_TEXT_CLASS_NAME)
-    );
+    var span = document.createElement(SPAN_TAG);
+    span.className = TAB_TEXT_CLASS;
+    span.innerText = tabValue;
+    tab.appendChild(span);
+    tab.className = TAB_CLASS;
     try {
 
         tab.attachEvent(ON_MOUSE_OUT_IE_ATTRIBUTE_NAME, mouseOutFunction);                       //For IE
@@ -282,26 +276,6 @@ function createTab(tabName, tabValue, onClickFunction, mouseOverFunction, mouseO
 }
 
 
-
-/**
- *  Create <span> element with defined inner text and defined value of attribute "className"
- *
- * @param innerText                 text that needs to be in span
- * @param classAttributeValue       value of attribute "className" that need to be in span
- * @return {HTMLElement}
- */
-function createSpan (innerText, classAttributeValue) {
-
-    var span = document.createElement(SPAN_TAG);
-
-    span.innerText = innerText;
-    span.className = classAttributeValue;
-
-    return span;
-}
-
-
-
 /**
  *  Append array of elements to define prent as children
  *
@@ -317,13 +291,11 @@ function appendElements(elements, parent) {
 }
 
 
-
 /**
  *
  *  TABLES
  *
  */
-
 
 
 /**
@@ -351,7 +323,6 @@ function initTables(tabNames) {
 }
 
 
-
 /**
  *  Create table with properties needed just in this tab that will be referenced by tab
  *
@@ -375,13 +346,12 @@ function createTables(tabNames, properties, tabAttributeName) {
 }
 
 
-
 /**
  *  Create table with properties that are taken from all properties allocated by tabAttribute in this properties
  *  Realize by loop that goes over all properties. In loop if property hasn't attribute with tabAttributeName or has it with value == tabValue,
  *  clone of this property go to new table.
  *
- * @param tabValue              string value of tab
+ * @param tabValue              id of tab
  * @param properties            array of all properties
  * @param tabAttributeName      attribute name used to find tabAttributeValue
  * @return {HTMLElement}        new sub table with some cloned properties
@@ -403,17 +373,6 @@ function createTable(tabValue, properties, tabAttributeName) {
         var tabAttributeValue = property.getAttribute(tabAttributeName);
 
         if (tabAttributeValue == null) {
-
-            if (isExpandedPropertyHeader(property)) {
-
-                property = properties[++propertyIndex];
-
-                while (!isExpandedPropertyFooter(property)) {
-                    property = properties[++propertyIndex];
-                }
-
-                property = properties[++propertyIndex];
-            }
 
             var cloneProperty = property.cloneNode(true);
             newTBody.appendChild(cloneProperty);
@@ -468,7 +427,6 @@ function createTable(tabValue, properties, tabAttributeName) {
 }
 
 
-
 /**
  *  Check property on header
  *  If property has three <td> sub elements and all of this <td>-s have attribute WCM_FORM_MAIN_HEADER - it is an expanded property header
@@ -492,7 +450,6 @@ function isExpandedPropertyHeader(property) {
     return isExpandedPropertyHeader;
 
 }
-
 
 
 /**
@@ -519,7 +476,6 @@ function isExpandedPropertyFooter(property) {
     return isExpandedPropertyFooter;
 
 }
-
 
 
 /**
@@ -550,7 +506,6 @@ function checkElementsOnHavingClassNameAttributeValue(elements, classNameAttribu
 }
 
 
-
 /**
  *  Adjust color of all sub elements of property
  *
@@ -569,7 +524,6 @@ function adjustPropertyColor(property, colorAttributeValue) {
 }
 
 
-
 /**
  *  Completely remove any dom element from page
  *
@@ -583,13 +537,11 @@ function removeElement(element) {
 }
 
 
-
 /**
  *
  *  TAB ONCLICK LISTENER
  *
  */
-
 
 
 /**
@@ -614,7 +566,6 @@ function chooseTab(tabIndex) {
 }
 
 
-
 /**
  *  Change color of pressed tab and of other tabs
  *
@@ -628,12 +579,11 @@ function changeTab (pressedTabIndex) {
     var tabs = tabsArea.getElementsByTagName(DIV_TAG);
 
     for (var tabIndex = 0; tabIndex < tabs.length; ++tabIndex) {
-        tabs[tabIndex].className = TAB_CLASS_NAME;
+        tabs[tabIndex].className = TAB_CLASS;
     }
 
-    tabs[pressedTabIndex].className = TAB_CLASS_NAME + ' ' + SELECTED_TAB_CLASS_NAME;
+    tabs[pressedTabIndex].className = TAB_CLASS + ' ' + SELECTED_TAB_CLASS;
 }
-
 
 
 /**
@@ -647,6 +597,7 @@ function setVisibilityOfElement(element, visibility) {
     element.style.display = visibility ? '' : 'none';
 
 }
+
 
 
 
@@ -670,3 +621,4 @@ window.onload = function () {
     }
 
 }
+ 
