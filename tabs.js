@@ -56,9 +56,15 @@ var TR_TAG = 'tr';
 
 var TD_TAG = 'td';
 
+var TH_TAG = 'th';
+
 var DIV_TAG = 'div';
 
 var SPAN_TAG = 'span';
+
+var A_TAG = 'a';
+
+var IMG_TAG = 'img';
 
 
 /**
@@ -107,6 +113,12 @@ var WCM_FORM_MAIN_HEADER = 'wcmFormMainHeader';
 var EXPANDED_PROPERTY_HEADER_CHILDREN_NUMBER = 3;
 
 var EXPANDED_PROPERTY_FOOTER_CHILDREN_NUMBER = 1;
+
+var SYSTEM_PROPERTY_HEADER_TH_CHILDREN = 1;
+
+var SYSTEM_PROPERTY_HEADER_A_CHILDREN = 2;
+
+var SYSTEM_PROPERTY_HEADER_IMG_CHILDREN = 2;
 
 var MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING = 2;
 
@@ -171,17 +183,27 @@ Array.prototype.contains = function (checkedElement) {
  * @param attributeName     name of attribute. Used to find values
  * @return {Array}          array of not repeated attribute values
  */
-function findAttributeValues(properties, attributeName) {
+function findAttributeValuesSkippingExpandedProperties(properties, attributeName) {
 
     var attributeValues = new Array();
 
     for (var propertyIndex = 0; propertyIndex < properties.length; ++propertyIndex) {
 
-        var value = properties[propertyIndex].getAttribute(attributeName);
-        if (value != null) {
-            if (!attributeValues.contains(value)) {
-                attributeValues.push(value);
+        var property = properties[propertyIndex];
+        if (isExpandedPropertyHeader(property) || isSystemPropertyHeader(property)) {
+
+            propertyIndex = skipToPropertyFooter(properties, propertyIndex);
+            ++propertyIndex;
+
+        } else {
+
+            var value = property.getAttribute(attributeName);
+            if (value != null) {
+                if (!attributeValues.contains(value)) {
+                    attributeValues.push(value);
+                }
             }
+
         }
 
     }
@@ -189,6 +211,19 @@ function findAttributeValues(properties, attributeName) {
     return attributeValues;
 }
 
+
+
+function skipToPropertyFooter (properties, currentPropertyIndex) {
+
+    var property
+            = properties[currentPropertyIndex];
+    while (!isPropertyFooter(property)) {
+        property
+            = properties[++currentPropertyIndex];
+    }
+
+    return currentPropertyIndex;
+}
 
 
 /**
@@ -381,21 +416,21 @@ function createTables(tabNames, properties, tabAttributeName) {
  *  Realize by loop that goes over all properties. In loop if property hasn't attribute with tabAttributeName or has it with value == tabValue,
  *  clone of this property go to new table.
  *
- * @param tabValue              string value of tab
+ * @param requiredTabValue              string value of tab
  * @param properties            array of all properties
  * @param tabAttributeName      attribute name used to find tabAttributeValue
  * @return {HTMLElement}        new sub table with some cloned properties
  */
-function createTable(tabValue, properties, tabAttributeName) {
+function createTable(requiredTabValue, properties, tabAttributeName) {
 
     var newTable
         = document.createElement(TABLE_TAG);
-    newTable.setAttribute(ID_ATTRIBUTE_NAME, tabValue);
+    newTable.setAttribute(ID_ATTRIBUTE_NAME, requiredTabValue);
 
     var newTBody
         = document.createElement(TBODY_TAG);
 
-    var color = 0;
+    var colorIndex = 0;
 
     for (var propertyIndex = 0; propertyIndex < properties.length; ++propertyIndex) {
 
@@ -404,67 +439,90 @@ function createTable(tabValue, properties, tabAttributeName) {
 
         if (tabAttributeValue == null) {
 
-            if (isExpandedPropertyHeader(property)) {
+            if (isExpandedPropertyHeader(property) || isSystemPropertyHeader(property)) {
 
-                property = properties[++propertyIndex];
-
-                while (!isExpandedPropertyFooter(property)) {
-                    property = properties[++propertyIndex];
-                }
-
-                property = properties[++propertyIndex];
-            }
-
-            var cloneProperty = property.cloneNode(true);
-            newTBody.appendChild(cloneProperty);
-
-        } else if (tabAttributeValue == tabValue) {
-
-            var cloneProperty = property.cloneNode(true);
-
-            if (isExpandedPropertyHeader(cloneProperty)) {
-
-                newTBody.appendChild(cloneProperty);
-                var nextProperty = properties[++propertyIndex];
-                cloneProperty = nextProperty.cloneNode(true);
-                newTBody.appendChild(cloneProperty);
-
-                while (!isExpandedPropertyFooter(cloneProperty)) {
-
-                    nextProperty = properties[++propertyIndex];
-                    cloneProperty = nextProperty.cloneNode(true);
-                    newTBody.appendChild(cloneProperty);
-
-                }
+                propertyIndex
+                    = appendPropertyWhileNotPropertyFooter(properties, propertyIndex, newTBody);
+                appendCloneToElement(properties[propertyIndex], newTBody);
 
             } else {
 
-                adjustPropertyColor(cloneProperty, WCM_FORM_ROW_CLASSES[color]);
-                ++color;
-                if (color == WCM_FORM_ROW_CLASSES.length) {
-                    color = 0;
-                }
-
-                newTBody.appendChild(cloneProperty);
+                adjustPropertyColor(property, WCM_FORM_ROW_CLASSES[colorIndex]);
+                colorIndex = increaseColorIndex(colorIndex);
+                appendCloneToElement(property, newTBody);
 
             }
 
-        } else if (isExpandedPropertyHeader(property)) {
+        } else if (tabAttributeValue == requiredTabValue) {
 
-            property = properties[++propertyIndex];
+            if (isExpandedPropertyHeader(property)) {
 
-            while (!isExpandedPropertyFooter(property)) {
-                property = properties[++propertyIndex];
+                propertyIndex
+                    = appendPropertyWhileNotPropertyFooter(properties, propertyIndex, newTBody);
+                appendCloneToElement(properties[propertyIndex], newTBody);
+
+            } else {
+
+                adjustPropertyColor(property, WCM_FORM_ROW_CLASSES[colorIndex]);
+                colorIndex = increaseColorIndex(colorIndex);
+                appendCloneToElement(property, newTBody);
+
             }
 
-            property = properties[++propertyIndex];
+        } else {
+
+            if (isExpandedPropertyHeader(property)) {
+                propertyIndex = skipToPropertyFooter(properties, propertyIndex);
+                ++propertyIndex;
+            }
 
         }
-
     }
     newTable.appendChild(newTBody);
 
     return newTable;
+}
+
+
+/**
+ *  Append clone of element to defined element
+ *
+ * @param cloneable     element that used to be cloned
+ * @param parent        element that used to be parent to element clone
+ */
+function appendCloneToElement (cloneable, parent) {
+
+    var child = cloneable.cloneNode(true);
+    parent.appendChild(child);
+
+}
+
+
+
+
+function increaseColorIndex (colorIndex) {
+
+    ++colorIndex;
+
+    if (colorIndex == WCM_FORM_ROW_CLASSES.length) {
+        colorIndex = 0;
+    }
+
+    return colorIndex;
+}
+
+
+
+function appendPropertyWhileNotPropertyFooter (properties, currentPropertyIndex, parent) {
+
+    var property = properties[currentPropertyIndex];
+
+    while (!isPropertyFooter(property)) {
+        appendCloneToElement(property, parent);
+        property = properties[++currentPropertyIndex];
+    }
+
+    return currentPropertyIndex;
 }
 
 
@@ -497,27 +555,59 @@ function isExpandedPropertyHeader(property) {
 
 /**
  *
- *  Check property on footer (end of expanded properties array)
- *  If property has one <td> sub element and this <td> has attribute WCM_FORM_MAIN_HEADER - it is an expanded property footer
+ *  Check property on footer (end of expanded properties or system properties array)
+ *  If property has one <td> sub element and this <td> has attribute WCM_FORM_MAIN_HEADER - it is a property footer
  *
  * @param property                  property for checking
  * @return {boolean}                true - if property is an expanded property footer, false - if is not
  */
-function isExpandedPropertyFooter(property) {
+function isPropertyFooter(property) {
 
     var trChildren = property.getElementsByTagName(TD_TAG);
 
-    var isExpandedPropertyFooter = true;
+    var isPropertyFooter = true;
 
     if (trChildren.length != EXPANDED_PROPERTY_FOOTER_CHILDREN_NUMBER) {
-        isExpandedPropertyFooter = false;
+        isPropertyFooter = false;
     } else {
-        isExpandedPropertyFooter
+        isPropertyFooter
             = checkElementsOnHavingClassNameAttributeValue(trChildren, WCM_FORM_MAIN_HEADER);
     }
 
-    return isExpandedPropertyFooter;
+    return isPropertyFooter;
 
+}
+
+
+
+function isSystemPropertyHeader (property) {
+
+    var trChildren = property.getElementsByTagName(TH_TAG);
+
+    var isSystemProperty = true;
+
+    if (trChildren.length != SYSTEM_PROPERTY_HEADER_TH_CHILDREN) {
+        isSystemProperty = false;
+    } else if (!checkElementsOnHavingClassNameAttributeValue(trChildren, WCM_FORM_MAIN_HEADER)) {
+        isSystemProperty = false;
+    } else {
+        for (var childIndex = 0; childIndex < trChildren.length; ++childIndex) {
+            if (!checkElementOnHavingDefinedChildren(trChildren[childIndex], A_TAG, SYSTEM_PROPERTY_HEADER_A_CHILDREN)
+                || !checkElementOnHavingDefinedChildren(trChildren[childIndex], IMG_TAG, SYSTEM_PROPERTY_HEADER_IMG_CHILDREN)
+            ) {
+                isSystemProperty = false;
+            }
+        }
+    }
+
+    return isSystemProperty;
+}
+
+
+
+
+function isSystemPropertyFooter (property) {
+    return isPropertyFooter(property);
 }
 
 
@@ -549,6 +639,20 @@ function checkElementsOnHavingClassNameAttributeValue(elements, classNameAttribu
 
 }
 
+
+
+function checkElementOnHavingDefinedChildren (element, childTagName, childCount) {
+
+    var elementHasSuchChildren = true;
+
+    var children = element.getElementsByTagName(childTagName);
+
+    if (children.length != childCount) {
+        elementHasSuchChildren = false;
+    }
+
+    return elementHasSuchChildren;
+}
 
 
 /**
@@ -650,12 +754,13 @@ function setVisibilityOfElement(element, visibility) {
 
 
 
+
 window.onload = function () {
 
     var propertiesTable
         = document.getElementById(PROPERTIES_TABLE);
 
-    var values = findAttributeValues(
+    var values = findAttributeValuesSkippingExpandedProperties(
         getAllTrsFromTable(propertiesTable),
         TAB_ATTRIBUTE_NAME
     );
