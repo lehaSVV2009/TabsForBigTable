@@ -125,6 +125,16 @@ var MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING = 2;
 
 /**
  *
+ *  Saving of current tab index
+ *
+ */
+
+var COOKIE_TAB_INDEX_NAME = 'tabIndex';
+
+
+
+/**
+ *
  *  GET ELEMENTS FUNCTIONS
  *
  */
@@ -413,10 +423,13 @@ function createTables(tabNames, properties, tabAttributeName) {
 
 /**
  *  Create table with properties that are taken from all properties allocated by tabAttribute in this properties
- *  Realize by loop that goes over all properties. In loop if property hasn't attribute with tabAttributeName or has it with value == tabValue,
- *  clone of this property go to new table.
+ *  Realize by loop that goes over all properties.
  *
- * @param requiredTabValue              string value of tab
+ *  If value of attribute from parameters == null then loop appends to new table copies of properties
+ *
+ *  If value of attribute from parameters == required value of attribute then loop
+ *
+ * @param requiredTabValue      required string value of tab. One table from one required tab
  * @param properties            array of all properties
  * @param tabAttributeName      attribute name used to find tabAttributeValue
  * @return {HTMLElement}        new sub table with some cloned properties
@@ -484,6 +497,7 @@ function createTable(requiredTabValue, properties, tabAttributeName) {
 }
 
 
+
 /**
  *  Append clone of element to defined element
  *
@@ -498,8 +512,12 @@ function appendCloneToElement (cloneable, parent) {
 }
 
 
-
-
+/**
+ *  Increase index for calculating property color
+ *
+ * @param colorIndex    index for increasing
+ * @return {*}          increased index
+ */
 function increaseColorIndex (colorIndex) {
 
     ++colorIndex;
@@ -512,7 +530,14 @@ function increaseColorIndex (colorIndex) {
 }
 
 
-
+/**
+ *  Append properties to parent element from property with currentPropertyIndex to footer the nearest footer property (property-end of expanded properties or system properties)
+ *
+ * @param properties                all properties that exists
+ * @param currentPropertyIndex      index of property from which appending starts
+ * @param parent                    element to whom properties append
+ * @return {*}                      index of the nearest footer property
+ */
 function appendPropertyWhileNotPropertyFooter (properties, currentPropertyIndex, parent) {
 
     var property = properties[currentPropertyIndex];
@@ -579,7 +604,12 @@ function isPropertyFooter(property) {
 }
 
 
-
+/**
+ *  Check property on system property header
+ *
+ * @param property          property for checking
+ * @return {boolean}        true - if property is an system property header, false - if is not
+ */
 function isSystemPropertyHeader (property) {
 
     var trChildren = property.getElementsByTagName(TH_TAG);
@@ -601,13 +631,6 @@ function isSystemPropertyHeader (property) {
     }
 
     return isSystemProperty;
-}
-
-
-
-
-function isSystemPropertyFooter (property) {
-    return isPropertyFooter(property);
 }
 
 
@@ -640,7 +663,14 @@ function checkElementsOnHavingClassNameAttributeValue(elements, classNameAttribu
 }
 
 
-
+/**
+ *  If element has children with defined tag name and the count of this children == required count, method returns true. else - false
+ *
+ * @param element               element for checking
+ * @param childTagName          tag name of checking children of element
+ * @param childCount            required number of children with such tag name
+ * @return {boolean}            true - if element has this children with required number, false - else
+ */
 function checkElementOnHavingDefinedChildren (element, childTagName, childCount) {
 
     var elementHasSuchChildren = true;
@@ -653,6 +683,7 @@ function checkElementOnHavingDefinedChildren (element, childTagName, childCount)
 
     return elementHasSuchChildren;
 }
+
 
 
 /**
@@ -715,6 +746,8 @@ function chooseTab(tabIndex) {
 
     changeTab(tabIndex);
 
+//    saveCurrentTabIndex(tabIndex);
+
 }
 
 
@@ -754,6 +787,68 @@ function setVisibilityOfElement(element, visibility) {
 
 
 
+/**
+ *  Save current clicked tab index in the cookie to the name COOKIE_TAB_INDEX
+ *
+ * @param currentTabIndex       tab index for saving
+ */
+function saveCurrentTabIndex (currentTabIndex) {
+
+    setCookie(COOKIE_TAB_INDEX_NAME, currentTabIndex);
+
+}
+
+
+
+/**
+ *  Get last clicked tab index from current by name COOKIE_TAB_INDEX
+ *
+ * @return {*}  last clicked tab from cookie
+ */
+function getCurrentTabIndex () {
+
+    var currentTabIndex = getCookie(COOKIE_TAB_INDEX_NAME);
+
+    if ("" == currentTabIndex) {
+        alert(currentTabIndex);
+        currentTabIndex = 0;
+    }
+
+    return currentTabIndex;
+}
+
+
+
+/**
+ *  Support method for working with cookie. Get value by name
+ *
+ * @return {String}     value or null if such not exists
+ */
+function getCookie(name) {
+    var cookieName = name + "=";
+    var cookieArray = document.cookie.split(';');
+    for(var cookieIndex = 0; cookieIndex < cookieArray.length; ++cookieIndex) {
+        var value = cookieArray[cookieIndex].trim();
+        if (value.indexOf(cookieName) == 0)
+            return value.substring(cookieName.length,value.length);
+    }
+    return "";
+}
+
+
+/**
+ *  Support method to set cookie.
+ *
+ */
+function setCookie (name, value) {
+
+    var date = new Date();
+    date.setTime(date.getTime());
+    var expires = "expires=" + date.toGMTString();
+    document.cookie = name + "=" + value + "; " + expires;
+
+}
+
 
 window.onload = function () {
 
@@ -771,7 +866,7 @@ window.onload = function () {
 
         initTables(values);
 
-        chooseTab(0);
+        chooseTab(/*getCurrentTabIndex()*/0);
     }
 
 }
