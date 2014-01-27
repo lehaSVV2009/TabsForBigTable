@@ -129,7 +129,7 @@ var MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING = 2;
  *
  */
 
-var COOKIE_TAB_INDEX_NAME = 'tabIndex';
+var TAB_INDEX_NAME_FOR_SAVING = 'tabIndex';
 
 
 
@@ -188,6 +188,8 @@ Array.prototype.contains = function (checkedElement) {
 
 /**
  *  Get array of not repeated attribute values from array of properties with defined attributeName
+ *  It skips all system properties because it needs to show in every tab
+ *  It also skips expanded properties except expanded header property
  *
  * @param properties        array of elements which may have
  * @param attributeName     name of attribute. Used to find values
@@ -200,7 +202,7 @@ function findAttributeValuesSkippingExpandedProperties(properties, attributeName
     for (var propertyIndex = 0; propertyIndex < properties.length; ++propertyIndex) {
 
         var property = properties[propertyIndex];
-        if (isExpandedPropertyHeader(property) || isSystemPropertyHeader(property)) {
+        if (isSystemPropertyHeader(property)) {
 
             propertyIndex = skipToPropertyFooter(properties, propertyIndex);
             ++propertyIndex;
@@ -214,6 +216,13 @@ function findAttributeValuesSkippingExpandedProperties(properties, attributeName
                 }
             }
 
+            if (isExpandedPropertyHeader(property)) {
+
+                propertyIndex = skipToPropertyFooter(properties, propertyIndex);
+                ++propertyIndex;
+
+            }
+
         }
 
     }
@@ -222,7 +231,13 @@ function findAttributeValuesSkippingExpandedProperties(properties, attributeName
 }
 
 
-
+/**
+ *  Skip propertyIndex (index of property in array of properties) to footer property(to end of expanded or system properties)
+ *
+ * @param properties                    all properties
+ * @param currentPropertyIndex          index of current selected property
+ * @return {*}                          index of footer property
+ */
 function skipToPropertyFooter (properties, currentPropertyIndex) {
 
     var property
@@ -339,7 +354,11 @@ function createSpan (innerText, classAttributeValue) {
 
     var span = document.createElement(SPAN_TAG);
 
-    span.innerText = innerText;
+    if (typeof(span.innerText) != String(undefined)) {
+        span.innerText = innerText;
+    } else {
+        span.textContent = innerText;                           //  For Mozilla Based Browsers
+    }
     span.className = classAttributeValue;
 
     return span;
@@ -746,7 +765,7 @@ function chooseTab(tabIndex) {
 
     changeTab(tabIndex);
 
-//    saveCurrentTabIndex(tabIndex);
+    saveCurrentTabIndex(tabIndex);
 
 }
 
@@ -794,7 +813,7 @@ function setVisibilityOfElement(element, visibility) {
  */
 function saveCurrentTabIndex (currentTabIndex) {
 
-    setCookie(COOKIE_TAB_INDEX_NAME, currentTabIndex);
+    sessionStorage.setItem(TAB_INDEX_NAME_FOR_SAVING, currentTabIndex);
 
 }
 
@@ -803,14 +822,13 @@ function saveCurrentTabIndex (currentTabIndex) {
 /**
  *  Get last clicked tab index from current by name COOKIE_TAB_INDEX
  *
- * @return {*}  last clicked tab from cookie
+ * @return {int}  last clicked tab from cookie
  */
 function getCurrentTabIndex () {
 
-    var currentTabIndex = getCookie(COOKIE_TAB_INDEX_NAME);
+    var currentTabIndex = sessionStorage.getItem(TAB_INDEX_NAME_FOR_SAVING);
 
-    if ("" == currentTabIndex) {
-        alert(currentTabIndex);
+    if (null == currentTabIndex || !isNaN(currentTabIndex)) {
         currentTabIndex = 0;
     }
 
@@ -818,36 +836,6 @@ function getCurrentTabIndex () {
 }
 
 
-
-/**
- *  Support method for working with cookie. Get value by name
- *
- * @return {String}     value or null if such not exists
- */
-function getCookie(name) {
-    var cookieName = name + "=";
-    var cookieArray = document.cookie.split(';');
-    for(var cookieIndex = 0; cookieIndex < cookieArray.length; ++cookieIndex) {
-        var value = cookieArray[cookieIndex].trim();
-        if (value.indexOf(cookieName) == 0)
-            return value.substring(cookieName.length,value.length);
-    }
-    return "";
-}
-
-
-/**
- *  Support method to set cookie.
- *
- */
-function setCookie (name, value) {
-
-    var date = new Date();
-    date.setTime(date.getTime());
-    var expires = "expires=" + date.toGMTString();
-    document.cookie = name + "=" + value + "; " + expires;
-
-}
 
 
 window.onload = function () {
@@ -866,7 +854,7 @@ window.onload = function () {
 
         initTables(values);
 
-        chooseTab(/*getCurrentTabIndex()*/0);
+        chooseTab(getCurrentTabIndex());
     }
 
 }
