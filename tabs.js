@@ -18,6 +18,13 @@ var PROPERTIES_TABLE = 'propertiesTable';
 
 
 /**
+ *  Id of element containing id of object in attribute
+ * @type {string}
+ */
+var OBJECT_ID_ELEMENT = 'objectIdElement';
+
+
+/**
  *
  *  HTML ELEMENTS ATTRIBUTES
  *
@@ -40,6 +47,8 @@ var ON_MOUSE_OUT_IE_ATTRIBUTE_NAME = 'onmouseout';
 var ON_MOUSE_OUT_CHROME_ATTRIBUTE_NAME = 'mouseout';
 
 var CLASS_ATTRIBUTE_NAME = 'class';
+
+var OBJECT_ID_ATTRIBUTE_NAME = 'objectId';
 
 
 /**
@@ -806,6 +815,7 @@ function setVisibilityOfElement(element, visibility) {
 
 
 
+
 /**
  *  Save current clicked tab index in the cookie to the name COOKIE_TAB_INDEX
  *
@@ -813,8 +823,10 @@ function setVisibilityOfElement(element, visibility) {
  */
 function saveCurrentTabIndex (currentTabIndex) {
 
-    sessionStorage.setItem(TAB_INDEX_NAME_FOR_SAVING, currentTabIndex);
-
+    var objectId = getObjectId();
+    if (objectId != null) {
+        sessionStorage.setItem(TAB_INDEX_NAME_FOR_SAVING + '.' + objectId, currentTabIndex);
+    }
 }
 
 
@@ -824,15 +836,35 @@ function saveCurrentTabIndex (currentTabIndex) {
  *
  * @return {int}  last clicked tab from cookie
  */
-function getCurrentTabIndex () {
+function getSavedTabIndex () {
 
-    var currentTabIndex = sessionStorage.getItem(TAB_INDEX_NAME_FOR_SAVING);
+    var objectId = getObjectId();
+    var key = TAB_INDEX_NAME_FOR_SAVING + (objectId != null ? '.' + objectId : '');
+    var currentTabIndex = sessionStorage.getItem(key);
 
-    if (null == currentTabIndex || !isNaN(currentTabIndex)) {
+    if (null == currentTabIndex || isNaN(currentTabIndex)) {
         currentTabIndex = 0;
     }
 
     return currentTabIndex;
+}
+
+
+
+/**
+ *  Get value of attribute objectId in object Id element
+ *
+ * @return      object id of element
+ */
+function getObjectId () {
+
+    var objectId = null;
+    var objectIdElement = document.getElementById(OBJECT_ID_ELEMENT);
+    if (objectIdElement != null) {
+        objectId = objectIdElement.getAttribute(OBJECT_ID_ATTRIBUTE_NAME);
+    }
+    return objectId;
+
 }
 
 
@@ -854,7 +886,7 @@ window.onload = function () {
 
         initTables(values);
 
-        chooseTab(getCurrentTabIndex());
+        chooseTab(getSavedTabIndex());
     }
 
 }
