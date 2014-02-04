@@ -1,0 +1,29 @@
+
+    .tab {
+        border: 1px dotted gray;
+        background: #E8E8E8;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: inline;
+        cursor: pointer;
+    }
+
+    .tabSelected {
+        background: none;
+    }
+
+    .tab :hover {
+        background: #696969;
+    }
+
+    .tabText {
+        margin-left: 8px;
+        margin-right: 8px;
+        color: black;
+        font-size: 15px;
+    }
+
+
+    #propertiesArea td {
+    	padding: 2.5pt;
+    }		
