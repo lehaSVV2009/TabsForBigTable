@@ -2,7 +2,7 @@
 // $Author:     kadet $
 // $Date:       Feb 29 2007 11:41:40  $
 //
-//  Functions for the creating tabs from html table
+//  Functions for creating tabs from html table
 
 
 
@@ -41,6 +41,13 @@ var NUMBER_OF_TH_CHILDREN_OF_SYSTEM_PROPERTIES = 1;
 var NUMBER_OF_A_CHILDREN_OF_SYSTEM_PROPERTIES = 2;
 
 var NUMBER_OF_IMG_CHILDREN_OF_SYSTEM_PROPERTIES = 2;
+
+
+/**
+ *  SIMPLE PROPERTY
+ */
+var NUMBER_OF_TD_CHILDREN_IN_PROPERTY = 3;
+
 
 
 
@@ -157,7 +164,7 @@ var FIRST_TAB_INDEX = 0;
 
 
 
-function makeAndShowTabs () {
+window.onload = function() {
 
     var properties
         = getPropertiesFromPropertiesTable();
@@ -182,7 +189,7 @@ function makeAndShowTabs () {
 function getPropertiesFromPropertiesTable () {
     var properties = [];
     var propertiesTable
-        = getPropertiesTable();
+            = getPropertiesTable();
     if (propertiesTable != null) {
         properties = getPropertiesFromTable(propertiesTable);
     }
@@ -192,7 +199,17 @@ function getPropertiesFromPropertiesTable () {
 
 
 function getPropertiesTable () {
-    return document.getElementById(PROPERTIES_TABLE_ID);
+    var propertiesTable = null;
+    var tables = document.getElementsByTagName('table');
+    for (var tableIndex = 0; tableIndex < tables.length; ++tableIndex) {
+        var table = tables[tableIndex];
+        if(table.getAttribute('cellspacing') == '1'
+            && table.getAttribute('cellpadding') == '3') {
+            propertiesTable = table;
+            break;
+        }
+    }
+    return propertiesTable;
 }
 
 
@@ -264,8 +281,8 @@ function getSubArray (array, begin, end) {
 
 function checkArrayLimit (begin, end, arrayLength) {
     if (begin >= 0 && begin <= arrayLength
-        && end <= arrayLength
-        && begin <= end) {
+           && end <= arrayLength
+           && begin <= end) {
         throw new Error("Not correct array limits");
     }
 }
@@ -443,7 +460,7 @@ Array.prototype.contains = function (checkedElement) {
 function checkElementOnHavingDefinedChildren (element, childTagName, childCount) {
     var elementHasSuchChildren = true;
     var children
-        = element.getElementsByTagName(childTagName);
+            = element.getElementsByTagName(childTagName);
     if (children.length != childCount) {
         elementHasSuchChildren = false;
     }
@@ -481,11 +498,11 @@ function createTabs (tabNames) {
         var tabName = tabNames[tabNameIndex];
         tabs.push(
             createTab(tabNameIndex,
-                tabName,
-                new Function('onTabClick(' + tabNameIndex + ')'),
-                new Function(),
-                new Function()
-            )
+                      tabName,
+                      new Function('onTabClick(' + tabNameIndex + ')'),
+                      new Function(),
+                      new Function()
+                      )
         );
     }
     return tabs;
@@ -546,7 +563,7 @@ function setMouseEventsOnElement (element, onClick, onMouseOver, onMouseOut) {
 function initTabsArea () {
     var tabsArea = createTabsArea();
     var tabsAreaWrapper
-        = createTabsAreaWrapper();
+            = createTabsAreaWrapper();
     tabsAreaWrapper.appendChild(tabsArea);
     appendTabsAreaWrapperToPropertiesTable(tabsAreaWrapper);
 }
@@ -574,7 +591,7 @@ function appendTabsAreaWrapperToPropertiesTable (tabsAreaWrapper) {
     var table = getPropertiesTable();
     var tBody = getTBodyFromTable(table);
     var propertiesHeader
-        = getHeaderOfPropertiesTable(table);
+            = getHeaderOfPropertiesTable(table);
     tBody.insertBefore(tabsAreaWrapper, propertiesHeader);
 }
 
@@ -607,7 +624,7 @@ function getTBodyFromTable (table) {
 function appendTabsToTabsArea (tabs) {
     var tabsArea = getTabsArea();
     appendElementsToNode(tabsArea, tabs);
-    tabsArea.colSpan = 3;
+    tabsArea.colSpan = NUMBER_OF_TD_CHILDREN_IN_PROPERTY;
 }
 
 
@@ -640,7 +657,7 @@ function appendElementsToNode (node, elements) {
  */
 function onTabClick (tabIndex) {
     var properties
-        = getPropertiesFromPropertiesTable();
+            = getPropertiesFromPropertiesTable();
     hide(properties);
     var tabValue = getTabValueByName(tabIndex);
     show(
@@ -876,7 +893,7 @@ function changeTab (pressedTabIndex) {
 function saveTabIndexOfSelectedTab (tabIndex) {
 
     var objectId = getObjectIdValue(
-        getObjectIdElement());
+                        getObjectIdElement());
     try {
         if (objectId != null) {
             sessionStorage.setItem(TAB_INDEX_NAME_FOR_SAVING + '.' + objectId, tabIndex);
@@ -893,7 +910,7 @@ function saveTabIndexOfSelectedTab (tabIndex) {
  */
 function getObjectIdElement () {
     return getHeaderOfPropertiesTable(
-        getPropertiesTable());
+                        getPropertiesTable());
 }
 
 
@@ -915,7 +932,7 @@ function getLastTabIndex () {
     var tabIndex = null;
 
     var objectId = getObjectIdValue(
-        getObjectIdElement());
+                        getObjectIdElement());
 
     var key = TAB_INDEX_NAME_FOR_SAVING + (objectId != null ? '.' + objectId : '');
 

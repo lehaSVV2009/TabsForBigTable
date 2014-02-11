@@ -14,6 +14,8 @@ var TABS_AREA_ID = 'tabsArea';
 
 var MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING = 2;
 
+var MINIMAL_NUMBER_OF_ORDERED_TABS = 1;
+
 
 /**
  *  PROPERTIES TABLE HEADER
@@ -125,6 +127,8 @@ var VALUE_ATTRIBUTE_NAME = 'value';
 
 var COLSPAN_ATRIBUTE_NAME = 'colspan';
 
+var TABS_ORDER_ATTRIBUTE_NAME = 'tabsOrder';
+
 
 
 /**
@@ -163,7 +167,9 @@ function makeAndShowTabs () {
         = getPropertiesFromPropertiesTable();
     var tabNames
         = getTabNamesFromProperties(properties);
+
     if (tabNames.length >= MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING) {
+        tabNames = sortTabNames(tabNames);
         initTabs(tabNames);
         onTabClick(getLastTabIndex());
     }
@@ -253,7 +259,7 @@ function isPropertiesTableHeader (property) {
 
 function getSubArray (array, begin, end) {
     var subArray = [];
-    checkArrayLimit(begin, end, array)
+    checkArrayLimit(begin, end, array);
     for (var arrayIndex = begin; arrayIndex <= end; ++arrayIndex) {
         subArray.push(array[arrayIndex]);
     }
@@ -452,6 +458,69 @@ function checkElementOnHavingDefinedChildren (element, childTagName, childCount)
 
 
 
+function sortTabNames (tabNames) {
+    try {
+        var tabsOrder = getTabsOrder();
+        tabNames = sortTabNamesByOrder(tabNames, tabsOrder);
+        return tabNames;
+    } catch (e) {
+        return tabNames;
+    }
+}
+
+
+
+function getTabsOrder () {
+    var tabsOrderText = getHeaderOfPropertiesTable(
+                                    getPropertiesTable())
+                        .getAttribute(TABS_ORDER_ATTRIBUTE_NAME);
+    if (tabsOrderText == null) {
+        throw new Error("Not Sorted Tabs");
+    }
+    var tabsOrder = tabsOrderText.split(', ');
+    return tabsOrder;
+}
+
+
+
+/**
+ *  Sort array of tab names by ordered array of tab names
+ *  At the beginning it puts to result array elements from array of tab names which are included in ordered array of tab names (in same order)
+ *  and then puts other elements from tab names
+ *
+ * @param tabNames              array for sorting
+ * @param orderedTabNames       array used to regulation of sorting
+ * @returns {*}                 sorted array
+ */
+function sortTabNamesByOrder (tabNames, orderedTabNames) {
+    var fullOrderedTabNames = [];
+    if (orderedTabNames.length < MINIMAL_NUMBER_OF_ORDERED_TABS) {
+        return tabNames;
+    }
+    for (var orderedTabNameIndex = 0; orderedTabNameIndex < orderedTabNames.length; ++orderedTabNameIndex) {
+        var orderedTabName = orderedTabNames[orderedTabNameIndex];
+        if (tabNames.contains(orderedTabName)) {
+            var tabName = tabNames.receive(orderedTabName);
+            fullOrderedTabNames.push(tabName);
+        }
+    }
+    for (var tabIndex = 0; tabIndex < tabNames.length; ++tabIndex) {
+        fullOrderedTabNames.push(tabNames[tabIndex]);
+    }
+    return fullOrderedTabNames;
+
+}
+
+
+
+Array.prototype.receive = function(value) {
+    for (var index = 0; index < this.length; index++) {
+        if (this[index] === value) {
+            return (this.splice(index, 1))[0];
+        }
+    }
+    return null;
+}
 
 
 

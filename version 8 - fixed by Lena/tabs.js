@@ -5,12 +5,9 @@
 //  Functions for the creating tabs from html table
 
 
-
 var PROPERTIES_TABLE_ID = 'propertiesTable';
 
 var TABS_AREA_ID = 'tabsArea';
-
-
 
 var MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING = 2;
 
@@ -25,24 +22,6 @@ var NUMBER_OF_CHILDREN_OF_PROPERTIES_TABLE_HEADER = 3;
  *  EXPANDED PROPERTY HEADER
  */
 var NUMBER_OF_CHILDREN_OF_EXPANDED_PROPERTY_HEADER = 3;
-
-
-/**
- *  PROPERTY FOOTER
- */
-var NUMBER_OF_CHILDREN_OF_PROPERTY_FOOTER = 1;
-
-
-/**
- *  SYSTEM PROPERTY HEADER
- */
-var NUMBER_OF_TH_CHILDREN_OF_SYSTEM_PROPERTIES = 1;
-
-var NUMBER_OF_A_CHILDREN_OF_SYSTEM_PROPERTIES = 2;
-
-var NUMBER_OF_IMG_CHILDREN_OF_SYSTEM_PROPERTIES = 2;
-
-
 
 /**
  *
@@ -86,6 +65,8 @@ var WCM_FORM_MAIN_HEADER = 'wcmFormMainHeader';
 var WCM_FORM_ROW_ODD_CLASS = 'wcmFormRowOdd';
 
 var WCM_FORM_ROW_EVEN_CLASS = 'wcmFormRowEven';
+
+var WCM_PROPERTY_ROW = "WcmPropertyRow";
 
 var WCM_FORM_ROW_CLASSES = [
     WCM_FORM_ROW_EVEN_CLASS,
@@ -155,14 +136,13 @@ var TAB_INDEX_NAME_FOR_SAVING = 'tabIndex';
 
 var FIRST_TAB_INDEX = 0;
 
-
+var propertiesRow = [];
+var tabsName = [];
 
 function makeAndShowTabs () {
 
-    var properties
-        = getPropertiesFromPropertiesTable();
-    var tabNames
-        = getTabNamesFromProperties(properties);
+    initPropertiesAndTabsFromPropertiesTable();
+    var tabNames = getTabsName();
     if (tabNames.length >= MINIMAL_NUMBER_OF_TABS_FOR_TABS_CREATING) {
         initTabs(tabNames);
         onTabClick(getLastTabIndex());
@@ -170,67 +150,62 @@ function makeAndShowTabs () {
 
 }
 
+function setPropertiesRow(tr)
+{
+    propertiesRow.push(tr);
+}
 
+function getPropertiesRow(){
+    return propertiesRow;
+}
 /**
  *
  *  GETTING TAB NAMES
  *
  */
 
+function setTabsName(theTabName)
+{
+    tabsName.push(theTabName);
+}
+
+function getTabsName()
+{
+    return tabsName;
+}
 
 
-function getPropertiesFromPropertiesTable () {
-    var properties = [];
-    var propertiesTable
-        = getPropertiesTable();
+
+function initPropertiesAndTabsFromPropertiesTable () {
+
+    var propertiesTable  = document.getElementById(PROPERTIES_TABLE_ID);
     if (propertiesTable != null) {
-        properties = getPropertiesFromTable(propertiesTable);
+
+        var tBody = propertiesTable.getElementsByTagName(TBODY_TAG)[0]
+        var allTrElements = tBody.getElementsByTagName(TR_TAG);
+
+        for(var i = 0; i<allTrElements.length; i++)
+        {
+            if(isRowPropertyTable(allTrElements[i]))
+            {
+                setPropertiesRow(allTrElements[i]);
+
+                if (!getTabsName().contains(allTrElements[i].getAttribute(TAB_ATTRIBUTE_NAME))) {
+                    setTabsName(allTrElements[i].getAttribute(TAB_ATTRIBUTE_NAME));
+                }
+
+            }
+        }
+
     }
-    return properties;
 }
 
-
-
-function getPropertiesTable () {
-    return document.getElementById(PROPERTIES_TABLE_ID);
-}
-
-
-
-function getPropertiesFromTable (table) {
-    var properties = [];
-    var tBody = getTBodyFromTable(table);
-    var allTrElements = tBody.getElementsByTagName(TR_TAG);
-    properties
-        = getPropertiesFromTrElements(allTrElements);
-    return properties;
-}
-
-
-/**
- *
- */
-
-/**
- *  Not every <tr>-element in table is property. There are some other <tr> elements (<tr> for showing class name and reference to file are not properties)
- *
- * @param trElements        all Trs from table
- * @return {Array}          array of <tr> which are properties
- */
-function getPropertiesFromTrElements (trElements) {
-    var properties = [];
-    var currentTrIndex = 0;
-    var tr = trElements[currentTrIndex];
-    while (!isPropertiesTableHeader(tr)) {
-        tr = trElements[++currentTrIndex];
+    function isRowPropertyTable(tr){
+        if(tr.className.indexOf(WCM_PROPERTY_ROW) !=-1 && tr.getAttribute(TAB_ATTRIBUTE_NAME))
+        return true;
+        return false;
     }
-    ++currentTrIndex;
-    if (currentTrIndex < trElements.length) {
-        var endElementIndex = trElements.length - 1;
-        properties = getSubArray(trElements, currentTrIndex, endElementIndex);
-    }
-    return properties;
-}
+
 
 
 /**
@@ -247,141 +222,6 @@ function isPropertiesTableHeader (property) {
 
     return isPropertiesTableHeader;
 }
-
-
-
-
-function getSubArray (array, begin, end) {
-    var subArray = [];
-    checkArrayLimit(begin, end, array)
-    for (var arrayIndex = begin; arrayIndex <= end; ++arrayIndex) {
-        subArray.push(array[arrayIndex]);
-    }
-    return subArray;
-}
-
-
-
-function checkArrayLimit (begin, end, arrayLength) {
-    if (begin >= 0 && begin <= arrayLength
-        && end <= arrayLength
-        && begin <= end) {
-        throw new Error("Not correct array limits");
-    }
-}
-
-
-
-
-
-function getTabNamesFromProperties (properties) {
-    var tabNames
-        = getTabNamesFromPropertiesSkippingExpandedAndSystemProperties(properties, TAB_ATTRIBUTE_NAME);
-    return tabNames;
-}
-
-
-
-/**
- *  Get array of not repeated values of properties attribute with name tabAttributeName
- *  Function skips all system properties cause it hasn't tab attribute
- *  It also skips all inner properties wrapped by expanded property header and property footer
- */
-function getTabNamesFromPropertiesSkippingExpandedAndSystemProperties (properties, tabAttributeName) {
-
-    var tabNames = [];
-
-    for (var propertyIndex = 0; propertyIndex < properties.length; ++propertyIndex) {
-
-        var property = properties[propertyIndex];
-        if (isSystemPropertyHeader(property)) {
-
-            propertyIndex = skipToPropertyFooter(properties, propertyIndex);
-            ++propertyIndex;
-
-        } else {
-
-            var tabName = property.getAttribute(tabAttributeName);
-            if (tabName != null) {
-                addToArrayIfElementNotYetExists(tabNames, tabName);
-            }
-
-            //  we don't search for tab in properties wrapped by expanded property header and footer
-            if (isExpandedPropertyHeader(property)) {
-
-                propertyIndex = skipToPropertyFooter(properties, propertyIndex);
-                ++propertyIndex;
-
-            }
-
-        }
-
-    }
-
-    return tabNames;
-}
-
-
-
-/**
- *  Check on system property header
- *  System property header is an <tr>-element which located at the end of properties and
- *      it is a beginning of elements which are showing any system data about file
- *
- */
-function isSystemPropertyHeader (property) {
-
-    var trChildren = property.getElementsByTagName(TH_TAG);
-
-    var isSystemProperty = true;
-
-    if (trChildren.length != NUMBER_OF_TH_CHILDREN_OF_SYSTEM_PROPERTIES
-        || !checkElementsOnHavingClassNameAttributeValue(trChildren, WCM_FORM_MAIN_HEADER)) {
-        isSystemProperty = false;
-    } else {
-        for (var childIndex = 0; childIndex < trChildren.length; ++childIndex) {
-            if (!checkElementOnHavingDefinedChildren(trChildren[childIndex], A_TAG, NUMBER_OF_A_CHILDREN_OF_SYSTEM_PROPERTIES)
-                || !checkElementOnHavingDefinedChildren(trChildren[childIndex], IMG_TAG, NUMBER_OF_IMG_CHILDREN_OF_SYSTEM_PROPERTIES)
-                ) {
-                isSystemProperty = false;
-            }
-        }
-    }
-
-    return isSystemProperty;
-}
-
-
-
-
-
-function skipToPropertyFooter (properties, currentPropertyIndex) {
-
-    var property
-        = properties[currentPropertyIndex];
-    while (!isPropertyFooter(property)) {
-        property
-            = properties[++currentPropertyIndex];
-    }
-
-    return currentPropertyIndex;
-}
-
-
-
-
-function isPropertyFooter(property) {
-    var isPropertyFooter = true;
-    var tdChildren = property.getElementsByTagName(TD_TAG);
-    if (tdChildren.length != NUMBER_OF_CHILDREN_OF_PROPERTY_FOOTER) {
-        isPropertyFooter = false;
-    } else {
-        isPropertyFooter
-            = checkElementsOnHavingClassNameAttributeValue(tdChildren, WCM_FORM_MAIN_HEADER);
-    }
-    return isPropertyFooter;
-}
-
 
 
 function isExpandedPropertyHeader(property) {
@@ -410,17 +250,6 @@ function checkElementsOnHavingClassNameAttributeValue(elements, classNameAttribu
     return result;
 }
 
-
-
-
-function addToArrayIfElementNotYetExists (array, element) {
-    if (!array.contains(element)) {
-        array.push(element);
-    }
-}
-
-
-
 /**
  *  For IE 8 method "contains" for Array
  *
@@ -435,24 +264,6 @@ Array.prototype.contains = function (checkedElement) {
     }
     return false;
 }
-
-
-/**
- * @return {boolean}    true - if element has defined number of defined children
- */
-function checkElementOnHavingDefinedChildren (element, childTagName, childCount) {
-    var elementHasSuchChildren = true;
-    var children
-        = element.getElementsByTagName(childTagName);
-    if (children.length != childCount) {
-        elementHasSuchChildren = false;
-    }
-    return elementHasSuchChildren;
-}
-
-
-
-
 
 
 /**
@@ -544,35 +355,20 @@ function setMouseEventsOnElement (element, onClick, onMouseOver, onMouseOut) {
  *  Create place for tabs
  */
 function initTabsArea () {
-    var tabsArea = createTabsArea();
-    var tabsAreaWrapper
-        = createTabsAreaWrapper();
+    var tabsArea = document.createElement(TD_TAG);
+    tabsArea.setAttribute(ID_ATTRIBUTE_NAME, TABS_AREA_ID);
+    var tabsAreaWrapper = document.createElement(TR_TAG);
+
     tabsAreaWrapper.appendChild(tabsArea);
     appendTabsAreaWrapperToPropertiesTable(tabsAreaWrapper);
 }
-
-
-
-function createTabsArea () {
-    var tabsArea = document.createElement(TD_TAG);
-    tabsArea.setAttribute(ID_ATTRIBUTE_NAME, TABS_AREA_ID);
-    return tabsArea;
-}
-
-
-
-function createTabsAreaWrapper () {
-    var tabsAreaWrapper = document.createElement(TR_TAG);
-    return tabsAreaWrapper;
-}
-
 
 /**
  *  Append tabs area wrapper to the tbody of table before the header of the properties table
  */
 function appendTabsAreaWrapperToPropertiesTable (tabsAreaWrapper) {
-    var table = getPropertiesTable();
-    var tBody = getTBodyFromTable(table);
+    var table = document.getElementById(PROPERTIES_TABLE_ID);
+    var tBody = table.getElementsByTagName(TBODY_TAG)[0];
     var propertiesHeader
         = getHeaderOfPropertiesTable(table);
     tBody.insertBefore(tabsAreaWrapper, propertiesHeader);
@@ -582,7 +378,7 @@ function appendTabsAreaWrapperToPropertiesTable (tabsAreaWrapper) {
 
 function getHeaderOfPropertiesTable (propertyTable) {
     var headerOfPropertiesTable = null;
-    var trElements = getTBodyFromTable(propertyTable).getElementsByTagName(TR_TAG);
+    var trElements = propertyTable.getElementsByTagName(TBODY_TAG)[0].getElementsByTagName(TR_TAG);
     for (var trIndex = 0; trIndex < trElements.length; ++trIndex) {
         var tr = trElements[trIndex];
         if (isPropertiesTableHeader(tr)) {
@@ -595,27 +391,11 @@ function getHeaderOfPropertiesTable (propertyTable) {
     return headerOfPropertiesTable;
 }
 
-
-
-function getTBodyFromTable (table) {
-    return table.getElementsByTagName(TBODY_TAG)[0];
-}
-
-
-
-
 function appendTabsToTabsArea (tabs) {
-    var tabsArea = getTabsArea();
+    var tabsArea =  document.getElementById(TABS_AREA_ID);
     appendElementsToNode(tabsArea, tabs);
     tabsArea.colSpan = 3;
 }
-
-
-
-function getTabsArea () {
-    return document.getElementById(TABS_AREA_ID);
-}
-
 
 
 function appendElementsToNode (node, elements) {
@@ -639,12 +419,13 @@ function appendElementsToNode (node, elements) {
  * @param tabIndex      tab.name
  */
 function onTabClick (tabIndex) {
-    var properties
-        = getPropertiesFromPropertiesTable();
-    hide(properties);
+
+    if(propertiesRow == null || tabsName == null)
+        initPropertiesAndTabsFromPropertiesTable();
+
+    hide(getPropertiesRow());
     var tabValue = getTabValueByName(tabIndex);
-    show(
-        extractPropertiesForShowing(tabIndex, tabValue, properties));
+    show(extractPropertiesForShowing(tabIndex, tabValue, getPropertiesRow()));
     changeTab(tabIndex);
     saveTabIndexOfSelectedTab(tabIndex);
 }
@@ -687,7 +468,7 @@ function getTabValueByName (name) {
 
 
 function getTabByName (name) {
-    var tabsArea = getTabsArea();
+    var tabsArea = document.getElementById(TABS_AREA_ID);
     var tab = null;
     var tabs = tabsArea.getElementsByTagName(DIV_TAG);
     for (var tabIndex = 0; tabIndex < tabs.length; ++tabIndex) {
@@ -727,73 +508,13 @@ function extractPropertiesForShowing (tabIndex, requiredTabValue, properties) {
         var property = properties[propertyIndex];
         var tabAttributeValue = property.getAttribute(TAB_ATTRIBUTE_NAME);
 
-        if (tabAttributeValue == null) {
-
-            if (isSystemPropertyHeader(property)) {
-
-                //  System properties are required by every tab clicking
-
-                propertyIndex = addPropertiesToArrayWhileNotPropertyFooter(properties, propertyIndex, propertiesForShowing);
-                propertiesForShowing.push(properties[propertyIndex]);
-
-            } else if (tabIndex == FIRST_TAB_INDEX) {
-
-                //  Properties without tab are required by clicking on the first tab
-
-                if (isExpandedPropertyHeader(property)) {
-
-                    propertyIndex = addPropertiesToArrayWhileNotPropertyFooter(properties, propertyIndex, propertiesForShowing);
-                    propertiesForShowing.push(properties[propertyIndex]);
-
-                } else {
-
-                    setPropertyColor(property, WCM_FORM_ROW_CLASSES[colorIndex]);
-                    colorIndex = increaseColorIndex(colorIndex);
-                    propertiesForShowing.push(properties[propertyIndex]);
-
-                }
-
-            } else {
-
-                if (isExpandedPropertyHeader(property)) {
-
-                    //  Expanded properties must be in the same location as expanded property header (now it is not in the array of the properties for showing)
-
-                    propertyIndex = skipToPropertyFooter(properties, propertyIndex);
-                    ++propertyIndex;
-
-                }
-
-            }
-
-
-        } else if (tabAttributeValue == requiredTabValue) {
+     if (tabAttributeValue == requiredTabValue) {
 
             //  If tab value is equal with required tab value this property must be in the array of the properties for showing
+         setPropertyColor(property, WCM_FORM_ROW_CLASSES[colorIndex]);
+         colorIndex = increaseColorIndex(colorIndex);
+         propertiesForShowing.push(properties[propertyIndex]);
 
-            if (isExpandedPropertyHeader(property)) {
-
-                propertyIndex = addPropertiesToArrayWhileNotPropertyFooter(properties, propertyIndex, propertiesForShowing);
-                propertiesForShowing.push(properties[propertyIndex]);
-
-            } else {
-
-                setPropertyColor(property, WCM_FORM_ROW_CLASSES[colorIndex]);
-                colorIndex = increaseColorIndex(colorIndex);
-                propertiesForShowing.push(properties[propertyIndex]);
-
-            }
-
-        } else {
-
-            //  Expanded properties are skipped like expanded header property
-
-            if (isExpandedPropertyHeader(property)) {
-
-                propertyIndex = skipToPropertyFooter(properties, propertyIndex);
-                ++propertyIndex;
-
-            }
 
         }
 
@@ -801,23 +522,6 @@ function extractPropertiesForShowing (tabIndex, requiredTabValue, properties) {
     return propertiesForShowing;
 
 }
-
-
-
-
-
-function addPropertiesToArrayWhileNotPropertyFooter (properties, currentPropertyIndex, array) {
-
-    var property = properties[currentPropertyIndex];
-
-    while (!isPropertyFooter(property)) {
-        array.push(property);
-        property = properties[++currentPropertyIndex];
-    }
-
-    return currentPropertyIndex;
-}
-
 
 
 /**
@@ -857,7 +561,7 @@ function increaseColorIndex (colorIndex) {
  */
 function changeTab (pressedTabIndex) {
 
-    var tabsArea = getTabsArea();
+    var tabsArea = document.getElementById(TABS_AREA_ID);
 
     var tabs = tabsArea.getElementsByTagName(DIV_TAG);
 
@@ -893,7 +597,7 @@ function saveTabIndexOfSelectedTab (tabIndex) {
  */
 function getObjectIdElement () {
     return getHeaderOfPropertiesTable(
-        getPropertiesTable());
+        document.getElementById(PROPERTIES_TABLE_ID));
 }
 
 
@@ -933,3 +637,4 @@ function getLastTabIndex () {
 
     return tabIndex;
 }
+

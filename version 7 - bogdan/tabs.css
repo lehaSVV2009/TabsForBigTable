@@ -1,0 +1,56 @@
+.tab {
+    border-bottom: 22px solid #E9E9E9;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent;
+    display: block;
+    float: left;
+    font-weight: bold;
+    height: 0;
+    padding: 10px;
+    text-decoration: none;
+    color: #2A526E;
+    font-size: 8pt;
+    position: relative;
+}
+
+.tabSelected {
+    border-bottom: 22px solid #b5c6d2;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent;
+    display: block;
+    float: left;
+    font-weight: bold;
+    height: 0;
+    padding: 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #000000;
+    color: #2A526E;
+    font-size: 9pt;
+    position: relative;
+}
+
+.tabText {
+    font-family: tahoma, arial, helvetica, serif;
+    position: relative;
+    line-height: 42px;
+    display: table-cell;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+* html .tabText {
+    font-family: tahoma, arial, helvetica, serif;
+    position: relative;
+    top: 28px;
+    line-height: normal;
+}
+
+#tabsArea {
+    border-bottom: 3px solid #b5c6d2;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+
+
+

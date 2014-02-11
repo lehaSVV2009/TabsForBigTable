@@ -1,6 +1,6 @@
 
     .tab {
-        border: 1px solid gray;
+        border: 1px dotted gray;
         background: #E8E8E8;
         padding-left: 10px;
         padding-right: 10px;
@@ -10,17 +10,11 @@
 
     .tabSelected {
         background: none;
-        border-bottom: 0px;
-    }
-
-    .tabselected span {
-        font-weight: bold;
     }
 
     .tabText {
         margin-left: 8px;
         margin-right: 8px;
         color: black;
-        font-size: 10pt;
-        font-family: tahoma, arial, helvetica, serif;
+        font-size: 15px;
     }
